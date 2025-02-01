@@ -1,6 +1,6 @@
 import java.util.Random;
 
-class Nave {
+public class Nave {
     protected String nome;
     protected int precisione;
     protected int potenza;
@@ -17,14 +17,6 @@ class Nave {
         return nome;
     }
 
-    public int getPrecisione() {
-        return precisione;
-    }
-
-    public int getPotenza() {
-        return potenza;
-    }
-
     public int getSalute() {
         return salute;
     }
@@ -36,8 +28,21 @@ class Nave {
         }
     }
 
+    public void recuperaSalute(int valore) {
+        salute += valore;
+    }
+
+    public void modificaPrecisione(int valore) {
+        precisione += valore;
+    }
+
     public void attacca(Nave nemico, int tipoAttacco, Random random) {
-        if (random.nextInt(100) < precisione) {
+        if (tipoAttacco == 0) {
+            System.out.println(nome + " usa Attacco Fallimentare, ma non infligge danni!");
+            return;
+        }
+
+        if (random.nextInt(100) < calcolaPrecisione(tipoAttacco)) {
             int danno = calcolaDanno(tipoAttacco);
             nemico.subisciDanno(danno);
             System.out.println(nome + " usa " + nomeAttacco(tipoAttacco) + " e infligge " + danno + " danni a " + nemico.getNome());
@@ -47,7 +52,11 @@ class Nave {
     }
 
     protected int calcolaDanno(int tipoAttacco) {
-        return potenza;
+        return tipoAttacco == 0 ? 0 : potenza;
+    }
+
+    protected int calcolaPrecisione(int tipoAttacco) {
+        return precisione;
     }
 
     protected String nomeAttacco(int tipoAttacco) {
@@ -60,86 +69,6 @@ class Nave {
                 return "Carico Esplosivo";
             default:
                 return "Attacco Fallimentare";
-        }
-    }
-}
-
-class NavePirata extends Nave {
-    public NavePirata(String nome, int precisione, int potenza, int salute) {
-        super(nome, precisione, potenza, salute);
-    }
-
-    @Override
-    protected int calcolaDanno(int tipoAttacco) {
-        switch (tipoAttacco) {
-            case 1:
-                return (int)(potenza * 1.2);
-            case 2:
-                return (int)(potenza * 0.8);
-            case 3:
-                return (int)(potenza * 1.5);
-            default:
-                return potenza;
-        }
-    }
-}
-
-class NaveVichinga extends Nave {
-    public NaveVichinga(String nome, int precisione, int potenza, int salute) {
-        super(nome, precisione, potenza, salute);
-    }
-
-    @Override
-    protected int calcolaDanno(int tipoAttacco) {
-        switch (tipoAttacco) {
-            case 1:
-                return (int)(potenza * 1.0);
-            case 2:
-                return (int)(potenza * 1.5);
-            case 3:
-                return (int)(potenza * 1.2);
-            default:
-                return potenza;
-        }
-    }
-}
-
-class NaveCeleste extends Nave {
-    public NaveCeleste(String nome, int precisione, int potenza, int salute) {
-        super(nome, precisione, potenza, salute);
-    }
-
-    @Override
-    protected int calcolaDanno(int tipoAttacco) {
-        switch (tipoAttacco) {
-            case 1:
-                return (int)(potenza * 1.3);
-            case 2:
-                return (int)(potenza * 0.9);
-            case 3:
-                return (int)(potenza * 1.4);
-            default:
-                return potenza;
-        }
-    }
-}
-
-class NaveFantasma extends Nave {
-    public NaveFantasma(String nome, int precisione, int potenza, int salute) {
-        super(nome, precisione, potenza, salute);
-    }
-
-    @Override
-    protected int calcolaDanno(int tipoAttacco) {
-        switch (tipoAttacco) {
-            case 1:
-                return (int)(potenza * 1.1);
-            case 2:
-                return (int)(potenza * 1.2);
-            case 3:
-                return (int)(potenza * 1.6);
-            default:
-                return potenza;
         }
     }
 }

@@ -53,7 +53,7 @@ public class Gioco {
         Nave nave1 = navi[scelta1];
         Nave nave2 = navi[scelta2];
 
-        System.out.println("\nInizia la battaglia tra " + nave1.getNome() + " e " + nave2.getNome() + "!");
+        System.out.println("\nInizia la battaglia tra " + nave1.getNome() + " e " + nave2.getNome());
 
         while (nave1.getSalute() > 0 && nave2.getSalute() > 0) {
 
@@ -85,11 +85,11 @@ public class Gioco {
         }
 
         if (nave1.getSalute() > 0) {
-            System.out.println("\nLa battaglia è finita! Il vincitore è " + nave1.getNome());
+            System.out.println("\nLa battaglia è finita! La nave degna dell'Amuleto del Mare è " + nave1.getNome());
         } else if (nave2.getSalute() > 0) {
-            System.out.println("\nLa battaglia è finita! Il vincitore è " + nave2.getNome());
+            System.out.println("\nLa battaglia è finita! La nave degna dell'Amuleto del Mare è " + nave2.getNome());
         } else {
-            System.out.println("\nLa battaglia è finita! Entrambe le navi sono state distrutte");
+            System.out.println("\nLa battaglia è finita! Nessuno è degno di possedere l'Amuleto del Mare");
         }
 
         scanner.close();
@@ -112,14 +112,14 @@ public class Gioco {
                 case 1:
                     System.out.println("\nEvento: Tempesta Improvvisa");
                     System.out.println("La precisione di entrambe le navi diminuisce di 10");
-                    nave1.precisione -= 10;
-                    nave2.precisione -= 10;
+                    nave1.modificaPrecisione(-10);
+                    nave2.modificaPrecisione(-10);
                     break;
                 case 2:
                     System.out.println("\nEvento: Trovato Tesoro Sommerso");
-                    System.out.println("Entramble navi recuperano 20 punti salute");
-                    nave1.salute += 20;
-                    nave2.salute += 20;
+                    System.out.println("Entrambe le navi recuperano 20 punti salute");
+                    nave1.recuperaSalute(20);
+                    nave2.recuperaSalute(20);
                     break;
                 case 3:
                     System.out.println("\nEvento: Scogli Nascosti");
@@ -131,4 +131,3 @@ public class Gioco {
         }
     }
 }
-
